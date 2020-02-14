@@ -4,6 +4,8 @@ import IconButton from '@material-ui/core/IconButton';
 import CancelIcon from '@material-ui/icons/Cancel';
 import PropTypes from 'prop-types';
 
+import GetData from './requests/GetData'
+
 import axios from 'axios';
 
 export default class Form extends React.Component {
@@ -41,9 +43,11 @@ export default class Form extends React.Component {
         console.log(this.questionType);
     }
 
-    handleRemove(e, index) {
+    handleRemove(index) {
+        // console.log(ar.splice(index, 1));
         this.state.Questions.splice(index, 1);
-        this.setState({ Questions: this.state.Questions })
+         console.log(this.state.Questions);
+         this.setState({ Questions: this.state.Questions })
     }
 
     handleSubmit(e) {
@@ -111,18 +115,31 @@ export default class Form extends React.Component {
         const form = {
             padding: "10px",
             marging: "10px",
+            minWidth: "400px"
         }
+        const insideForm = {
+           display: "flex", 
+           alignItems: "center"
+        }
+
+        const formInput = {
+            width: "100%"
+        }
+
+        const addB = {
+            fontSize: "0.6rem",
+            padding: "5px 10px",
+            margin: "0 5px"
+        }
+
         return (
             <div style={form}>
-                Select a Type and Enter Question.
-                <label>
-                    Question
-                </label>
+                Enter Question.
                 {
                     this.state.Questions.map((Question, index) => {
                         return (
-                            <div key={index} >
-                                <input onChange={(e) => this.handleChange(e, index)} value={Question} />
+                            <div style={insideForm} key={index} >
+                                <input style={formInput} onChange={(e) => this.handleChange(e, index)} value={Question} />
                                 {/* <select onChange={(e) => this.handleSelectChange(e, index)} name="questionType">
                                     <option value="text">Text</option>
                                     <option value="options">Options</option>
@@ -142,12 +159,10 @@ export default class Form extends React.Component {
                     })
                 }
                 <hr></hr>
-                <Button onClick={(e) => this.addQueston(e)} >
-                    Add Question
+                <Button style={addB} variant="contained" color="secondary" onClick={(e) => this.addQueston(e)} >
+                    Add
                 </Button>
-                <hr>
-                </hr>
-                <Button onClick={(e) => this.handleSubmit(e)} >
+                <Button style={addB} variant="contained" color="primary" onClick={(e) => this.handleSubmit(e)} >
                     Submit
                 </Button>
                 {/* <Button onClick={(e) => this.handleClear(e)} >Clear</Button> */}

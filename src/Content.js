@@ -23,6 +23,9 @@ import clsx from 'clsx';
 import Form from './form'
 import LoadQuestion from './loadQuestion'
 import GetData from './requests/GetData'
+
+import axios from 'axios';
+
 // import List from '@material-ui/core/List';
 // import ListItem from '@material-ui/core/ListItem';
 // import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -139,7 +142,15 @@ function Content(props) {
     };
 
     const refreshData = event => {
-        new GetData(1)
+        axios.get('http://eletionapp.3m3pfprvaw.ap-south-1.elasticbeanstalk.com/api/questions').then(response => {
+            // this.state.data = response;
+            const data = response.data;
+            this.setState({ datas: data.reverse() })
+            console.log(response, this.state)
+
+        }).catch(error => {
+            console.log(error)
+        })
     }
 
     const handleClose = () => {

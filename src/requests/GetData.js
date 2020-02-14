@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+
 class GetData extends Component {
     constructor(props) {
         super(props)
@@ -9,10 +10,12 @@ class GetData extends Component {
         }
     }
 
+
     componentDidMount() {
         axios.get('http://eletionapp.3m3pfprvaw.ap-south-1.elasticbeanstalk.com/api/questions').then(response => {
             // this.state.data = response;
-            this.setState({ datas: response.data })
+            const data = response.data;
+            this.setState({ datas: data.reverse() })
             console.log(response, this.state)
 
         }).catch(error => {
