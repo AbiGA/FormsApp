@@ -51,28 +51,23 @@ export default class Form extends React.Component {
         //     alert("NO")
         // }
         // localStorage.setItem("questionList", JSON.stringify(this.state))
-        const abc = {
-            "question": "Question 2",
-            "type": "text",
-            "options": [
-            ],
-            "userId": ""
+          for(var i=0; i< this.state.Questions.length; i++) {
+            axios.post(`http://eletionapp.3m3pfprvaw.ap-south-1.elasticbeanstalk.com/api/questions`, 
+            {
+                "question": this.state.Questions[i],
+                "type": "text",
+                "options": [],
+                "userId": ""
+              })
+            .then(res => {
+              console.log(res);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+            // console.log(this.state, "All Questions");
+            this.setState({ Questions: this.state.Questions })
           }
-        axios.post(`http://eletionapp.3m3pfprvaw.ap-south-1.elasticbeanstalk.com/api/questions`, {
-            "question": "Question 3",
-            "type": "text",
-            "options": [],
-            "userId": "",
-            "id": "5e46762e5289e076be1009e7"
-          })
-        .then(res => {
-          console.log(res);
-        })
-        .catch(error => {
-            console.log(error);
-        });
-        // console.log(this.state, "All Questions");
-        this.setState({ Questions: this.state.Questions })
 
     }
 
@@ -155,7 +150,7 @@ export default class Form extends React.Component {
                 <Button onClick={(e) => this.handleSubmit(e)} >
                     Submit
                 </Button>
-                <Button onClick={(e) => this.handleClear(e)} >Clear</Button>
+                {/* <Button onClick={(e) => this.handleClear(e)} >Clear</Button> */}
             </div >
         )
     }

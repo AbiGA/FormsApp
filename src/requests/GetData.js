@@ -10,7 +10,7 @@ class GetData extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://eletionapp.3m3pfprvaw.ap-south-1.elasticbeanstalk.com/api/forms').then(response => {
+        axios.get('http://eletionapp.3m3pfprvaw.ap-south-1.elasticbeanstalk.com/api/questions').then(response => {
             // this.state.data = response;
             this.setState({ datas: response.data })
             console.log(response, this.state)
@@ -25,7 +25,7 @@ class GetData extends Component {
             <div>
                 {
                     datas.length ?
-                        datas.map(data => <div key={data.id}> {data.formname} </div>) :
+                        datas.map((data,index) => <div key={data.id}> {index+1} - {data.question} </div>) :
                         null
                 }
 

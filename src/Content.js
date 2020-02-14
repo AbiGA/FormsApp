@@ -237,9 +237,8 @@ function Content(props) {
                 <Typography color="textSecondary" align="center">
                     Questions
                 </Typography>
-                <LoadQuestion />
+                {/* <LoadQuestion /> */}
                 <GetData />
-                <p>hello</p>
             </div>
         </Paper>
     );
